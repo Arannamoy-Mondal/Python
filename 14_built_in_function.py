@@ -1,0 +1,5 @@
+mx=max([12,13,14,15,16])
+mn=min([0,1,2,3,4,5,-1])
+cnt=len([50,50,6,0,70])
+totalsum=sum([40,50,60])
+print(mx,mn,cnt,totalsum)
