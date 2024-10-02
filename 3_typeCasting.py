@@ -1,0 +1,6 @@
+firstDigit=float(input('Enter a number: '))
+secondDigit=float(input('Enter a number: '))
+firstString=str(firstDigit)
+secondString=str(secondDigit)
+print('Total sum:',firstDigit+secondDigit)
+print('Concat:',firstString+secondString)
