@@ -1,6 +1,2 @@
-num=input()
-num1=int(num)
-num2=int(num.__reversed__)
-print(num2)
-"""12121
-"""
+num = lambda a:a*a
+print(num(2**2))
