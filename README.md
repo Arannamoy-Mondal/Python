@@ -8,3 +8,12 @@
 # python3 -m venv my_env
 # ls my_env
 # source my_env/bin/activate
+
+# ---------------------------------
+# Issue for ubuntu while installing PyAutoGUI package:
+# echo Display
+# xhost +SI:localuser:$(whoami)
+# sudo apt-get install xvfb
+# xvfb-run python /home/workstation/Desktop/Test/Project/TestPython/test.py
+# pip uninstall pyautogui mouseinfo
+# pip install pyautogui
