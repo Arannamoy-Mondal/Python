@@ -10,6 +10,7 @@
 # source my_env/bin/activate
 
 # ---------------------------------
+# Skip this..................................................Skip this
 # Issue for ubuntu while installing PyAutoGUI package:
 # echo Display
 # xhost +SI:localuser:$(whoami)
