@@ -14,6 +14,7 @@
 # Issue for ubuntu while installing PyAutoGUI package:
 # echo Display
 # xhost +SI:localuser:$(whoami)
+# xhost +local:$(whoami)
 # sudo apt-get install xvfb
 # xvfb-run python /home/workstation/Desktop/Test/Project/TestPython/test.py
 # pip uninstall pyautogui mouseinfo
