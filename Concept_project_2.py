@@ -17,88 +17,67 @@ class User:
         self.__password=newPassWord
         # print(f'{self.__password}')
     def checkCriteria(self,name1,id1,password1):
-        # print(f'{self.name},{self.id},{self.__password},\n,{name1},{id1},{password1}')
+        print(f'\t{self.name},{self.id},{self.__password},\n\t,{name1},{id1},{password1}')
         if self.name!=name1:
-            print('problem in name')
+            print('\tproblem in name')
             return False
         elif self.id!=id1:
-            print('problem in id')
+            print('\tproblem in id')
             return False
         elif self.__password!=password1:
-            print('Problem in password')
+            print('\tProblem in password')
             return False
         else:
             return True
-    # def userAddBook(self,name):
-    #     self.borrowedBooks.append(name)
-    # def isBookAvailable(self):
-    #     for it in self.borrowedBooks:
-    #         print(it)            
 
 class Library:
     def __init__(self,name):
         self.name=name
         self.userList=[]
         self.bookList=[]
+
+
     def addUser(self,name,id,password):
         user=User(name,id,password)
         self.userList.append(user)
         return user
+    
     def addBooks(self,name,id,category,quantity):
-        book=Book(name,id,category,quantity)
+        book=Book(name,id,category,int(quantity))
         self.bookList.append(book)
         return book
+    
+
     def showBookList(self):
         for book in self.bookList:
-            print(f'Book name: {book.name}, Book category: {book.category}, Book quantity: {book.quantity}')
+            print(f'\tBook name: {book.name}, Book category: {book.category}, Book quantity: {book.quantity}')
+
+
     def showUserList(self):
         for user in self.userList:
-            print(f'User name: {user.name}, User id: {user.id}')
-    """
-def borrowBook(self,name,id,password,bookName):
-        user=User(name,id,password)
-        ok=False
-        for it in self.userList:
-            if(it.checkCriteria(name,id,password)):
-                print('Congratulations ! You are logged in.')
-                ok=True
-                break
-        if ok==True:
-            for it in user.borrowedBooks:
-                print('GO')
-            for it in self.bookList:
-                if it.name==bookName and it.quantity>0:
-                    it.quantity-=1
-                    user.borrowedBooks.append(f'{bookName}')
-                    print(f'You have successfully borrowed this book. Please collect from shelf no: {randrange(100,999)}') 
-                    break
-        else:
-           print('No user found')   """ 
-lib1=Library('Hello')
-book1=lib1.addBooks('CP Book',231,'CP',10)
-book2=lib1.addBooks('CP Book 2',234,'CP',1)
-user1=lib1.addUser('Aranna','231','123')
-user2=lib1.addUser('Aranna2','232','123')
-user1.borrowedBooks.append('CP')
-lib1.showBookList()
-lib1.showUserList()
-# borrowBook(lib1,'Aranna','231','123','CP Book')
-# borrowBook(lib1,'Aranna','231','123','CP Book 2')
-# borrowBook(lib1,'Aranna2','232','123','CP Book 2')
-print(user2.borrowedBooks)
+            print(f'\tUser name: {user.name}, User id: {user.id}')
 
 
+
+
+
+
+
+
+
+lib1=Library('Library 1')
 user=None
-
 while(True):
-    op=input('\tRegistration/Log In/Exit(R/L/E)\n\tEnter option:')
+    op=input('\n\tRegistration/Log In/Administration/Exit(R/L/A/E)\n\tEnter option:')
     if op=='R' or op=='r':
         name=input('\n\tEnter name:')
+        if(len(name)<4):
+            name=input('\n\tEnter name (Minimum 4 character):')
         id=input('\n\tEnter id:')
         password=(input('\n\tEnter password:'))
         user=User(name,id,password)
-        lib1.addUser(user,id,password)
-        print('\tRegistration successful.\n\tNow log in')
+        lib1.addUser(name,id,password)
+        print('\n\tRegistration successful.\n\tNow log in')
     elif op=='L' or op=='l':
         name=input('\n\tEnter name:')
         id=input('\n\tEnter id:')
@@ -107,17 +86,19 @@ while(True):
         ok=False
         for it in lib1.userList:
             if(it.checkCriteria(name,id,password)==True):
-                print('\tLog in successful')
+                print('\n\tLog in successful')
                 ok=True
                 break
-        if ok==True:
+        if ok==False:
+            print('\n\tYou have enter incorrect credential.')
+        elif ok==True:
             while True:
-                choice=int(input('\tEnter 1 for borrow book, 2 for return book, 3 for book list, 0 for exit:'))
+                choice=int(input('\n\tEnter 1 for borrow book, 2 for return book, 3 for book list, 0 for exit:'))
                 if choice==1:
-                     name=input('\tEnter book name:')
+                     name=input('\n\tEnter book name:')
                      found=False
                      if name in user.borrowedBooks:
-                        print('\tYou have already borrowed this book')
+                        print('\n\tYou have already borrowed this book')
                         continue
                      for it in lib1.bookList:
                         if it.name==name and it.quantity>1:
@@ -125,27 +106,49 @@ while(True):
                           it.quantity-=1
                           break
                      if found==True:
-                        print('\tBook borrowed successfully')
+                        print('\n\tBook borrowed successfully')
                         user.borrowedBooks.append(name)
                      else:
-                         print('\tBook not found')
+                         print('\n\tBook not found')
                 elif choice==2:
-                    choice2=input('\tAre you want to return your book? (Y/N):')
+                    choice2=input('\n\tAre you want to return your book? (Y/N):')
                     if choice2=='Y' or choice2=='y':
-                        name=input('\tEnter book name:')
+                        name=input('\n\tEnter book name:')
                         if name in user.borrowedBooks:
                             user.borrowedBooks.remove(name)
                             for it in lib1.bookList:
                                 if it.name==name:
                                     it.quantity+=1
                                     break
-                            print('\tYou have successfully return this book.')
+                            print('\n\tYou have successfully return this book.')
                         else:
-                            print('\tYou return this book or you have enter incorrect name.')
+                            print('\n\tYou return this book or you have enter incorrect name.')
                 elif choice==3:
-                    print(f'\tYour borrowed books are: {user.borrowedBooks}')
+                    print(f'\n\tYour borrowed books are: {user.borrowedBooks}')
                 elif choice==0:
                     break
     elif op=='E' or op=='e':
-        print('\tThanks for visiting')
+        print('\n\tThanks for visiting')
         break
+    elif op=='A' or op=='a':
+        userid=input('\n\tEnter userid:')
+        password=input('\n\tEnter password:')
+        if userid=='admin' and password=='admin':
+            print('\n\tAdmin log in successful.')
+            while True:
+                choice=int(input('\n\t1 for Add book in booklist, 2 for user list, 3 for book list, 0 for exit:'))
+                if choice==1:
+                    name=input('\n\tEnter book name:')
+                    id=input('\n\tEnter book id:')
+                    category=input('\n\tEnter book category:')
+                    quantity=input('\n\tEnter book quantity:')
+                    lib1.addBooks(name,id,category,quantity)
+                    print('\n\tAdd book successfully')
+                elif choice==2:
+                    lib1.showUserList()
+                elif choice==3:
+                    lib1.showBookList()
+                elif choice==0:
+                    break
+
+
