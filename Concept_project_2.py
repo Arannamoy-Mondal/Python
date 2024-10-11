@@ -6,6 +6,9 @@ class Book:
         self.category=category
         self.quantity=quantity
 
+
+
+
 class User:
     def __init__(self,name,id,password):
         self.name=name
@@ -29,6 +32,8 @@ class User:
             return False
         else:
             return True
+
+
 
 class Library:
     def __init__(self,name):
@@ -56,10 +61,6 @@ class Library:
     def showUserList(self):
         for user in self.userList:
             print(f'\tUser name: {user.name}, User id: {user.id}')
-
-
-
-
 
 
 
